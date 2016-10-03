@@ -5,13 +5,13 @@
  * 
  *  Copyright (C) 2016 the contributors
  *
- *  
- *
- * 
+ *  Luiz Vitor Martinez Cardoso
+ *  Jules Thuillier
+ *  @lex (avafinger)
  *
  *  gcc cap.c -o cap $(pkg-config --libs --cflags opencv) -lm
  *
- *  gcc -I/usr/src/linux-headers-3.10.102/ cap.c -o cap $(pkg-config --libs --cflags opencv) -lm -O3
+ *  gcc -I/usr/src/linux-headers-VERSION/ cap.c -o cap $(pkg-config --libs --cflags opencv) -lm -O3
  *
 */
 
