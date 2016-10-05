@@ -152,6 +152,28 @@ static int xioctl(int fd, int request, void *arg)
     return r;
 }
 
+int v4l2_display_sizes_pix_format(int fd)
+{
+	int ret = 0;
+	int fsizeind = 0; /*index for supported sizes*/
+	struct v4l2_frmsizeenum fsize;
+
+    printf("V4L2 pixel sizes:\n");
+
+	CLEAR(fsize);
+	fsize.index = 0;
+	fsize.pixel_format = V4L2_PIX_FMT_YUV420;
+
+	while ((ret = xioctl(fd, VIDIOC_ENUM_FRAMESIZES, &fsize)) == 0)	{
+		fsize.index++;
+		if (fsize.type == V4L2_FRMSIZE_TYPE_DISCRETE) {
+			printf("( %u x %u ) Pixels\n", fsize.discrete.width, fsize.discrete.height);
+			fsizeind++;
+		}	
+	}
+    return fsizeind;
+}
+
 int v4l2_display_pix_format(int fd)
 {
     struct v4l2_fmtdesc fmt;
@@ -171,7 +193,7 @@ int v4l2_display_pix_format(int fd)
         fmt.index = ++index;
         fmt.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     }
-    printf("\n");
+    // printf("\n");
 }
 
 #ifdef _V4L2_KERNEL_
@@ -277,6 +299,8 @@ int v4l2_init_camera(int fd)
     }
 
     v4l2_display_pix_format(fd);
+    v4l2_display_sizes_pix_format(fd);
+    printf("\n");
 
     fmt.fmt.pix.width = width;
     fmt.fmt.pix.height = height;
