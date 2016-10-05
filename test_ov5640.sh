@@ -6,13 +6,13 @@ heigth=(1936 1536 1080 1200 960 720 768 600 480 240 144)
 function reload() {
 	echo "Reloading OV5640, wait..."
 	sleep 1
-	modprobe -r -v vfe_v4l2
+	sudo modprobe -r -v vfe_v4l2
 	sleep 2
-	modprobe -r -v ov5640
+	sudo modprobe -r -v ov5640
 	sleep 1
-	modprobe ov5640 frame_rate="$1"
+	sudo modprobe ov5640 frame_rate="$1"
 	sleep 2
-	modprobe vfe_v4l2
+	sudo modprobe vfe_v4l2
 	sleep 1
 	echo "done!"
 }
@@ -20,9 +20,9 @@ function reload() {
 function load() {
 	echo "Loading OV5640, wait..."
 	sleep 1
-	modprobe vfe_v4l2
+    sudo modprobe ov5640 frame_rate="$1"
 	sleep 2
-	modprobe ov5640 frame_rate
+	sudo modprobe vfe_v4l2
 	sleep 1
 	echo "done!"
 }
@@ -30,9 +30,9 @@ function load() {
 function unload() {
 	echo "Unloading OV5640, wait..."
 	sleep 1
-	modprobe -r -v vfe_v4l2
+	sudo modprobe -r -v vfe_v4l2
 	sleep 2
-	modprobe -r -v ov5640
+	sudo modprobe -r -v ov5640
 	sleep 1
 	echo "done!"
 }
