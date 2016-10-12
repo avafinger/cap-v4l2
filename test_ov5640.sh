@@ -40,7 +40,7 @@ function unload() {
 for index in ${!width[*]}
 do
 	# reload "$1"
-	echo "TEST $index - ( ${width[$index]} x ${heigth[$index]} )"
+	echo "TEST OV5640 - $index - ( ${width[$index]} x ${heigth[$index]} )"
 	# ./cap <width> <height> <buffers [4,8]> <video mode [0,1]> <exposure [-4,4]> <hflip [0,1]> <vflip [0,1]>
 	./cap "${width[$index]}" "${heigth[$index]}" "4" "1" "-999" "-1" "-1"
 done
