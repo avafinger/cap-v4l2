@@ -36,6 +36,10 @@ if you build cap for A64 you need to uncomment the following line in order to co
 
 	https://github.com/avafinger/cap-v4l2/blob/master/cap.c#L47
 
+You will need also the Linux headers source files (/usr/src/kernel-version-XXXXXXX) whend building for A64, change the line to match your kernel version:
+
+	https://github.com/avafinger/cap-v4l2/blob/master/build_script_A64.sh#L3
+
 - you can also run a simple test ./test_ov5640.sh to grab all frames and display some FPS statistics
 
 
