@@ -40,6 +40,9 @@ You will need also the Linux headers source files (/usr/src/kernel-version-XXXXX
 
 	https://github.com/avafinger/cap-v4l2/blob/master/build_script_A64.sh#L3
 
+Build using: /build_script_A64.sh (for A64)
+
+
 - you can also run a simple test ./test_ov5640.sh to grab all frames and display some FPS statistics
 
 
