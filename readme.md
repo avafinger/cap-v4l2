@@ -22,6 +22,14 @@ Example:
 	./cap 1920 1080 8 1 -999 -1 -1
 
 
+Requirements:
+=============
+
+- good Distro image (Ubuntu or Jessie) with no broken packages
+- gcc and all the deps libraries (run sudo ./install_deps.sh)
+- run the ./build_script.sh for H3 / A83T and ./build_script_A64.sh for the A64
+- linux headers if you build for A64 (or get it here: https://github.com/avafinger/OV5640_camera)
+
 How to build
 ============
 
@@ -45,7 +53,7 @@ Building for A64 use the provided script:
 - Important (A83T):
 
 If you run cap on BananaPi M3 you need to re-compile kernel and supress some BPI fix for the 8M sensor that set v4l2 minimum buffer to 8.
-
+Or you can try to increase buffer number and see if you don't get the error: 'insufficient buffer memory.'
 
 Building for A83T use the provided script: 
 
