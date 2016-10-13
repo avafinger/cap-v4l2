@@ -12,6 +12,7 @@ Example:
 	./cap 1920 1080 4 1 -999 -1 -1
 
 
+
 Usage (OV8865)
 ==============
 	./cap width heigth n_buffers=8 video_mode=1 exposure=-999 Hflip=-1 Vflip=-1
@@ -30,18 +31,29 @@ How to build
 	./build_script.sh
 	./cap 1920 1080 4 1 -999 -1 -1 (output will be frame_1920x1080.jpg)
 
-- Important:
+- Important (A64):
 
-You will need the Linux headers source files (/usr/src/linux-headers-XXXXXXX) whend building for A64, install the kernel headers
+You will need Linux headers source files (/usr/src/linux-headers-XXXXXXX) when building for A64, install the kernel headers
 
 
 
-Build fo A64 using: 
+Building for A64 use the provided script: 
 
 	./build_script_A64.sh
 
 
-- you can also run a simple test ./test_ov5640.sh to grab all frames and display some FPS statistics
+- Important (A83T):
+
+If you run cap on BananaPi M3 you need to re-compile kernel and supress some BPI fix for the 8M sensor that set v4l2 minimum buffer to 8.
+
+
+Building for A83T use the provided script: 
+
+	./build_script.sh
+
+
+
+- you can run a simple test ./test_ov5640.sh to grab all frames and display some FPS statistics
 
 
 Output from testing cap app
