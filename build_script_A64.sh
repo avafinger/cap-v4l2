@@ -1,4 +1,5 @@
 #!/bin/bash
-echo "Building cap with kernel header version 3.10.102...."
-gcc -I/usr/src/linux-headers-3.10.102 cap.c -o cap $(pkg-config --libs --cflags opencv) -lm -O3
+echo "Building cap with kernel header version" $(uname -r) "...."
+echo "Searching for: /usr/src/linux-headers-"$(uname -r) "...."
+gcc -D_V4L2_KERNEL_ -I/usr/src/linux-headers-$(uname -r) cap.c -o cap $(pkg-config --libs --cflags opencv) -lm -O3
 echo "done!"
