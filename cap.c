@@ -54,8 +54,19 @@
 #include "videodev2.h"
 #endif
 
+// #include <opencv2/core/core.hpp>
+// #include <opencv2/highgui/highgui.hpp>
+
 #include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc_c.h>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2/videoio.hpp>
+#include <opencv2/highgui.hpp>
+
+using namespace cv;
+using namespace std;
 
 #ifdef _V4L2_KERNEL_
 #define V4L2_MODE_VIDEO				0x0002  /* video capture */
@@ -292,6 +303,7 @@ int v4l2_init_camera(int fd)
 
     parms.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     parms.parm.capture.capturemode = sensor_video_mode ? V4L2_MODE_VIDEO : V4L2_MODE_IMAGE;
+    // parms.parm.capture.capturemode =0;
     parms.parm.capture.timeperframe.numerator = 1;
     parms.parm.capture.timeperframe.denominator = sensor_video_mode ? 30 : 7;
     if (-1 == xioctl(fd, VIDIOC_S_PARM, &parms)) {
@@ -459,11 +471,11 @@ int v4l2_retrieve_frame(int fd, int buffers_count, int save_frame_jpg, int save_
     }
 
     if (save_frame_jpg) {
-        frame_yuv = calloc(ALIGN_16B(width) * height * 3, sizeof(unsigned char));
-        yuv420p_to_bgr(buffers[buf.index].start, buf.length, frame_yuv);
-        frame_bgr = cvMat(height, width, CV_8UC3, (void *) frame_yuv);
+        unsigned char **frame_yuv = (unsigned char **)calloc(ALIGN_16B(width) * height * 3, sizeof(*frame_yuv));
+        yuv420p_to_bgr(buffers[buf.index].start, buf.length, *frame_yuv);
+        cv::Mat frame_bgr = cv::Mat(height, width, CV_8UC3, frame_yuv);
         sprintf(frame_name, "frame_%dx%d.jpg", width, height);
-        cvSaveImage(frame_name, &frame_bgr, 0);
+        imwrite(frame_name, frame_bgr);
         free(frame_yuv);
     }
 
